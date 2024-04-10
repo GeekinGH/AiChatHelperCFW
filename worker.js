@@ -151,8 +151,8 @@ class Gemini {
       if (this.model === "gemini") {
           this.model = 'gemini-pro';
       }
-      if (proxyUrl !== '') {
-          this.url = `${proxyUrl}/v1beta/models/${this.model}:generateContent?key=${this.authorization}`;
+      if (this.proxyUrl !== '') {
+          this.url = `${this.proxyUrl}/v1beta/models/${this.model}:generateContent?key=${this.authorization}`;
         } else {
           this.url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.authorization}`;
         }
