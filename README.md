@@ -2,19 +2,16 @@
 only for 微信助手<br>
 欢迎来到微信助手 ChatGPT 反向代理项目！<br>
 
-## 微信助手反代部署到 Cloudflare Workers，需要在2个地方部署，有点复杂：
-cf方案，可以解决 Gemini “User location is not supported for the API use”的问题，请按照以下步骤搭建gemini中转：
-1. 前往 [palm-netlify-proxy](https://github.com/antergone/palm-netlify-proxy) 仓库，点击 "Deploy With Netlify" 按钮。
-2. 部署完成后，您将获得由Netlify分配的域名（例如，https://xxx.netlify.app）。
-3. 在您的 AiChatHelper 项目的worker.js 中搜索 this.proxyUrl ，值为您从部署 palm 代理获得的域名（https://xxx.netlify.app）。
-4. （如果你之前已经部署过此项目）重新部署您的 AiChatHelper 项目到cloudflare worker 。这将解决该问题。（如果是第一次部署本项目，请忽略这步，往下看。。。）
-
+微信助手反代部署到 Cloudflare Workers，需要在2个地方部署，有点复杂
 ## CF worker的搭建步骤，我这里用文字说明，图文请参照最后提供的链接
 1. 你需要有一个自己的域名，因为cf的dev域名是被🧱的。
 2. 你需要有一个cloudflare账号，把你的域名添加到cf。
 3. 在cf首页，点击“Workers和Pages”，右上角“创建应用程序”-->"创建Worker"。
 4. 输入worker的名字（随意），点击部署。
-5. 如果需要解决gemini区域限制的方法，先在netlify部署好gemini的反代，设置好worker.js中的 this.proxyUrl 地址！！！
+5. 如果需要解决gemini“User location is not supported for the API use”区域限制的方法，先在netlify部署好gemini的反代，设置好worker.js中的 this.proxyUrl 地址！！！<br>
+   5.1 前往 [palm-netlify-proxy](https://github.com/antergone/palm-netlify-proxy) 仓库，点击 "Deploy With Netlify" 按钮。<br>
+   5.2 部署完成后，您将获得由Netlify分配的域名.例如:https://xxx.netlify.app<br>
+   5.3 在您的 AiChatHelper 项目的worker.js 中搜索 this.proxyUrl ，值为您从部署 palm 代理获得的域名https://xxx.netlify.app<br>
 6. 点击“编辑代码：，把本仓库中的worker.js中的代码复制粘贴到worker.js中。
 7. 点击右上角的“保存并部署”。
 8. 替换自己的域名。在worker管理界面，点击触发器，添加自定义域。
