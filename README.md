@@ -12,7 +12,7 @@ only for 微信助手<br>
    5.1 前往 [palm-netlify-proxy](https://github.com/antergone/palm-netlify-proxy) 仓库，点击 "Deploy With Netlify" 按钮。<br>
    5.2 部署完成后，您将获得由Netlify分配的域名.例如:https://xxx.netlify.app<br>
    5.3 在您的 AiChatHelper 项目的worker.js 中搜索 this.proxyUrl ，值为您从部署 palm 代理获得的域名https://xxx.netlify.app<br>
-6. 点击“编辑代码：，把本仓库中的worker.js中的代码复制粘贴到worker.js中。
+6. 点击“编辑代码：，把本仓库中的worker.js中的代码复制粘贴到worker中。
 7. 点击右上角的“保存并部署”。
 8. 替换自己的域名。在worker管理界面，点击触发器，添加自定义域。
 9. 输入自己的域名（一般自己设置一个子域名），点击”添加自定义域“。
