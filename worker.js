@@ -3,6 +3,9 @@
 //[]内不添加微信ID则表示不进行鉴权
 const WXID_ARRAY = [];
 
+//360 API Key
+const APIKEY360 = "";
+
 // 定义各种AI类
 class Gemini {
   constructor(requestModel, requestAuthorization, requestMessages) {
@@ -571,18 +574,26 @@ async function handleRequest(request) {
             return respondJsonMessage('我是狗，偷接口，偷了接口当小丑～');
         }
         
-        const requestAuthorization = request.headers.get('authorization');
+        let requestAuthorization = request.headers.get('authorization');
         if (!requestAuthorization) {
             throw new Error('未提供 API Key');
         }
         
         const requestBody = await request.json();
-        const requestModel = requestBody.model.toLowerCase().trim();
+        let requestModel = requestBody.model.toLowerCase().trim();
+        const requestMessages = requestBody.messages;
+        const lastMessage = requestMessages[requestMessages.length - 1].content.trim();
 
+        // 判断是否需要文生图模式
+        if (APIKEY360 !== "" && lastMessage.startsWith("画")) {
+          requestModel = "360gpt-pro";
+          requestAuthorization = APIKEY360;
+        }
+      
         let response;
         const ModelClass = supportedModels[requestModel];
         if (ModelClass) {
-            const modelInstance = new ModelClass(requestModel, requestAuthorization, requestBody.messages);
+            const modelInstance = new ModelClass(requestModel, requestAuthorization, requestMessages);
             const fetchResponse = await fetch(modelInstance.url, {
                 method: 'POST',
                 headers: modelInstance.headers,
