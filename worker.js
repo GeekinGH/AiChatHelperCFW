@@ -584,7 +584,7 @@ async function handleRequest(request) {
         const lastMessage = requestMessages[requestMessages.length - 1].content.trim();
 
         // 判断是否需要文生图模式
-        if (APIKEY360.length !== 0 && lastMessage.startsWith("画")) {
+        if (APIKEY360.length > 0 && lastMessage.startsWith("画")) {
           requestModel = "360gpt-pro";
           requestAuthorization = APIKEY360;
         }
