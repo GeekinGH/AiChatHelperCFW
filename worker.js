@@ -540,6 +540,7 @@ addEventListener('fetch', event => {
 const supportedModels = {
     'gpt-3.5-turbo': ChatGPT,
     'gpt-4': ChatGPT,
+    'GPT-4o': ChatGPT,
     'gemini-pro': Gemini,
     'gemini': Gemini,
     'gemini-1.5-pro-latest': Gemini,
